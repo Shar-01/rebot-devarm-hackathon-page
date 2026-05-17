@@ -405,15 +405,16 @@
           <div>
             <h2>Robot setup</h2>
             <p>
-              The project uses a Seeed-style reBot B601 arm with a gripper. The control stack works with B601 joint
-              targets directly, avoiding the ambiguity that appears when policies trained on other robot
-              morphologies emit incompatible actions.
+              The project uses an LLM as an orchestrator for a Seeed-style reBot B601 arm with a gripper. Instead
+              of treating the language model as a direct motor controller, the LLM reasons over the task state and
+              selects tool calls: inspect the scene, choose a subtask, request a motion plan, run a solver, or send
+              a bounded command to the robot stack.
             </p>
             <p>
-              We collected and reused teleoperated motion data, explored in-context prompts for Gemini Robotics ER,
-              and tested policy rollouts against the real arm. The core lesson was simple: for this robot, the
-              action representation has to stay faithful to B601 joint positions, gripper convention, and camera
-              viewpoint.
+              The solver layer handles the concrete manipulation work. It converts the selected subtask into robot
+              actions, checks joint limits and gripper conventions, and executes B601-compatible commands. This
+              keeps high-level reasoning, perception, and sequencing in the LLM while leaving geometry, constraints,
+              and low-level actuation to deterministic tools.
             </p>
           </div>
           <div>
