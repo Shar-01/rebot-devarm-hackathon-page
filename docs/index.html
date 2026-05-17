@@ -82,9 +82,9 @@
         margin: 0 auto;
         padding: 42px 0 28px;
         display: grid;
-        grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
-        gap: 34px;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 28px;
+        align-items: start;
       }
 
       .eyebrow {
@@ -98,8 +98,8 @@
 
       h1 {
         margin: 0;
-        max-width: 880px;
-        font-size: clamp(2.6rem, 6.5vw, 6.2rem);
+        max-width: 1040px;
+        font-size: clamp(2.45rem, 5vw, 5.15rem);
         line-height: 0.95;
         letter-spacing: 0;
       }
@@ -136,6 +136,7 @@
       }
 
       .video-shell {
+        width: min(100%, 1080px);
         background: #050606;
         border: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
@@ -346,7 +347,7 @@
 
         <div class="video-shell">
           <video controls playsinline preload="metadata">
-            <source src="assets/rebot-devarm-assembly-full.mov" type="video/quicktime" />
+            <source src="assets/rebot-devarm-assembly-full.mp4" type="video/mp4" />
             Your browser does not support embedded video playback.
           </video>
           <div class="video-caption">
