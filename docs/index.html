@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>reBot DevArm | Robot Assembly in Resource-Constrained Environments</title>
+    <meta
+      name="description"
+      content="Hackathon project page for reBot DevArm: a compact robot arm assembly workflow for resource-constrained environments."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #151515;
+        --muted: #5c646c;
+        --paper: #f7f8f5;
+        --panel: #ffffff;
+        --line: #d9ded8;
+        --accent: #17756f;
+        --accent-2: #6b4fd6;
+        --warm: #b45f19;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        background: #0f1414;
+        color: #fff;
+      }
+
+      nav {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.82);
+        text-decoration: none;
+      }
+
+      .hero-content {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 42px 0 28px;
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+        gap: 34px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #9be5df;
+        font-size: 0.88rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 880px;
+        font-size: clamp(2.6rem, 6.5vw, 6.2rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .hero p {
+        max-width: 680px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(1.05rem, 1.8vw, 1.26rem);
+      }
+
+      .hero-actions {
+        margin-top: 26px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 11px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        text-decoration: none;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+
+      .button.primary {
+        background: #fff;
+        color: #101414;
+      }
+
+      .video-shell {
+        background: #050606;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      }
+
+      .video-shell video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background: #050606;
+      }
+
+      .video-caption {
+        padding: 12px 14px;
+        color: rgba(255, 255, 255, 0.74);
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 0.94rem;
+      }
+
+      .hero-foot {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 0 0 28px;
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 0.94rem;
+      }
+
+      main {
+        background: var(--paper);
+      }
+
+      section {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 72px 0;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        gap: 44px;
+        align-items: start;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: clamp(1.9rem, 4vw, 3.4rem);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .lead {
+        color: #2c3337;
+        font-size: 1.22rem;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .metric {
+        min-height: 144px;
+        padding: 24px;
+        background: var(--panel);
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--accent);
+        font-size: 1.8rem;
+        line-height: 1.05;
+        margin-bottom: 8px;
+      }
+
+      .band {
+        width: 100%;
+        max-width: none;
+        background: #fff;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .band-inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 72px 0;
+      }
+
+      .workflow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .workflow article {
+        min-height: 210px;
+        padding: 24px;
+        background: #fff;
+      }
+
+      .workflow span {
+        color: var(--warm);
+        font-weight: 900;
+      }
+
+      .workflow h3 {
+        margin: 18px 0 10px;
+        font-size: 1.15rem;
+      }
+
+      .code-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 26px;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .code-panel code {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+
+      .repo-button {
+        min-height: 46px;
+        padding: 12px 16px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      footer {
+        padding: 34px 20px 44px;
+        text-align: center;
+        color: var(--muted);
+        background: #fff;
+      }
+
+      @media (max-width: 900px) {
+        .hero-content,
+        .split,
+        .code-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-content {
+          padding-top: 24px;
+        }
+
+        .metric-grid,
+        .workflow {
+          grid-template-columns: 1fr;
+        }
+
+        section,
+        .band-inner,
+        nav,
+        .hero-content,
+        .hero-foot {
+          width: min(100% - 28px, 720px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <nav>
+        <div class="brand">reBot DevArm</div>
+        <div class="nav-links">
+          <a href="#problem">Problem</a>
+          <a href="#system">System</a>
+          <a href="#workflow">Workflow</a>
+          <a href="https://github.com/keertimanney/reBot-DevArm">Code</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Hackathon project page</p>
+          <h1>Robot assembly for constrained environments</h1>
+          <p>
+            We built a tabletop manipulation workflow where a compact robot arm organizes small assembly parts in a
+            tight workspace using low-cost cameras, teleoperation data, and practical robot-control scripts.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/keertimanney/reBot-DevArm">View Codebase</a>
+            <a class="button" href="#system">Read the Setup</a>
+          </div>
+        </div>
+
+        <div class="video-shell">
+          <video controls playsinline preload="metadata">
+            <source src="assets/rebot-devarm-assembly-full.mov" type="video/quicktime" />
+            Your browser does not support embedded video playback.
+          </video>
+          <div class="video-caption">
+            Full uploaded demo video: a compact arm works over a narrow tabletop cell, manipulating black lattice
+            parts into an assembly layout.
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        Full video retained as the main project artifact. Codebase linked to the reBot DevArm repository.
+      </div>
+    </header>
+
+    <main>
+      <section id="problem" class="split">
+        <div>
+          <h2>Backdrop</h2>
+          <p class="lead">
+            Resource-constrained assembly means doing useful manipulation with limited space, affordable sensors,
+            modest compute, and hardware that has to be easy to deploy.
+          </p>
+          <p>
+            The video shows a small tabletop cell: loose lattice components, a compact gripper, visual table
+            markers, and a forming structure. It is intentionally not an industrial robot cage. The scene looks
+            closer to a field lab, mobile repair station, classroom workspace, or low-cost manufacturing bench.
+          </p>
+          <p>
+            Our target behavior is assembly-oriented manipulation: approach a part, align the gripper, pick,
+            transport, and place parts into a useful configuration while staying inside the arm’s reachable
+            workspace.
+          </p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric">
+            <strong>Compact</strong>
+            Small arm and tabletop footprint.
+          </div>
+          <div class="metric">
+            <strong>Vision</strong>
+            Environment and wrist-view perception experiments.
+          </div>
+          <div class="metric">
+            <strong>Teleop</strong>
+            Joint-position demonstrations for action grounding.
+          </div>
+          <div class="metric">
+            <strong>Assembly</strong>
+            Part handling, placement, and structure-building.
+          </div>
+        </div>
+      </section>
+
+      <div class="band" id="system">
+        <div class="band-inner split">
+          <div>
+            <h2>Robot setup</h2>
+            <p>
+              The project uses a Seeed-style reBot B601 arm with a gripper. The control stack works with B601 joint
+              targets directly, avoiding the ambiguity that appears when policies trained on other robot
+              morphologies emit incompatible actions.
+            </p>
+            <p>
+              We collected and reused teleoperated motion data, explored in-context prompts for Gemini Robotics ER,
+              and tested policy rollouts against the real arm. The core lesson was simple: for this robot, the
+              action representation has to stay faithful to B601 joint positions, gripper convention, and camera
+              viewpoint.
+            </p>
+          </div>
+          <div>
+            <h2>Task goal</h2>
+            <p>
+              The assembly task is to manipulate small black lattice blocks in a constrained workspace. A useful
+              robot behavior must locate the loose parts, align at close range, close the gripper at the right time,
+              lift without dragging, and place parts into a stable pattern.
+            </p>
+            <p>
+              This is a deliberately practical manipulation setting: small objects, imperfect views, limited reach,
+              and a workspace that leaves little margin for sloppy motion.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <section id="workflow">
+        <h2>Assembly workflow</h2>
+        <div class="workflow">
+          <article>
+            <span>01</span>
+            <h3>Perceive the bench</h3>
+            <p>Use the environment view to understand the part layout, assembly region, and arm location.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Align the gripper</h3>
+            <p>Move through B601 joint targets while the wrist view supports local alignment.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Pick and transport</h3>
+            <p>Close the gripper only after alignment, then lift and move through the constrained workspace.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Place into structure</h3>
+            <p>Release parts into a stable configuration and repeat the behavior for assembly progress.</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="band">
+        <div class="band-inner">
+          <div class="code-panel">
+            <div>
+              <h2>Codebase</h2>
+              <p>
+                The robot-control work, calibration assets, inference experiments, and in-context prompt artifacts
+                live in the reBot DevArm repository.
+              </p>
+              <code>https://github.com/keertimanney/reBot-DevArm</code>
+            </div>
+            <a class="repo-button" href="https://github.com/keertimanney/reBot-DevArm">Open Codebase</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      reBot DevArm hackathon project · built for practical robot assembly in constrained environments
+    </footer>
+  </body>
+</html>
