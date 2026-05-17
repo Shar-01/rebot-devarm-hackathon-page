@@ -435,26 +435,36 @@
 
       <section id="workflow">
         <h2>Assembly workflow</h2>
+        <p class="lead">
+          We created a library of atomic robot skills using repeatable inverse kinematics for the reBot arm. These
+          subskills compose into larger behaviors that move reconfigurable blocks from pose A to pose B with
+          repeatable motion.
+        </p>
+        <p>
+          The high-level AI agent does not directly micromanage every motor command. Instead, it calls the required
+          skills as tools based on the user request and the desired block configuration, letting the solver-backed
+          skill layer handle the concrete movement.
+        </p>
         <div class="workflow">
           <article>
             <span>01</span>
-            <h3>Perceive the bench</h3>
-            <p>Use the environment view to understand the part layout, assembly region, and arm location.</p>
+            <h3>Define block poses</h3>
+            <p>Represent each reconfigurable block by its current pose A and desired pose B in the workspace.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Align the gripper</h3>
-            <p>Move through B601 joint targets while the wrist view supports local alignment.</p>
+            <h3>Run atomic IK skills</h3>
+            <p>Use repeatable IK primitives for approach, align, grasp, lift, translate, lower, and release.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Pick and transport</h3>
-            <p>Close the gripper only after alignment, then lift and move through the constrained workspace.</p>
+            <h3>Compose bigger skills</h3>
+            <p>Chain atomic subskills into reusable pick-and-place behaviors for reliable pose-to-pose motion.</p>
           </article>
           <article>
             <span>04</span>
-            <h3>Place into structure</h3>
-            <p>Release parts into a stable configuration and repeat the behavior for assembly progress.</p>
+            <h3>Orchestrate by AI agent</h3>
+            <p>The high-level agent calls the needed skills to achieve the user-requested block configuration.</p>
           </article>
         </div>
       </section>
